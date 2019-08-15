@@ -58,9 +58,15 @@ export class HelloIonicPage {
       encodingType: this.camera.EncodingType.JPEG,      
       correctOrientation: true
     }
+    let win: any = window;
     console.log(cameraOptions);
     this.camera.getPicture(cameraOptions)
-      .then(file_uri => this.imageSrc = file_uri, 
+      .then(file_uri => 
+        {
+          console.log(file_uri);
+          console.log(win.Ionic.WebView.convertFileSrc(file_uri));
+          this.imageSrc = (win.Ionic.WebView.convertFileSrc(file_uri));
+        }, 
       err => console.log(err));   
   }
 
