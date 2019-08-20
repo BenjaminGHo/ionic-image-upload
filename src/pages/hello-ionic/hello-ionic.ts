@@ -18,29 +18,55 @@ export class HelloIonicPage {
 
   }
 
-  
-  ngOnInit() {
 
-    //this.getImage = "http://localhost:5985/kittens/mydoc2/testing.jpg";
-    /*
-    var db = new PouchDB('http://localhost:5985/kittens');
-    var url = "";
-    var blob = db.getAttachment('mydoc1', 'testing.jpg').then(function(blob) {
-      url = URL.createObjectURL(blob);
-      console.log(url);
-      console.log(this.getImage);
-      this.getImage = url;
-      console.log(this.getImage);
-      
-      }).catch(function (err) {
-        console.log(err);
-      });
-      //return url;
-      */
+  ngOnInit() {
+    
+    this.loadPictures();
+  }
+
+  loadPictures() {
+
+    var url = '';
+    var username = '';
+    var password = '';
+    var remoteDb = new PouchDB(url,
+      {auth: {username: username, password: password}});
+
+
+    remoteDb.allDocs().then(function (doc) {
+      var allRows = doc.rows;
+      for (var i = 0; i < allRows.length; i++)
+      {
+        var keyName = allRows[i].key;
+
+        /** not sure why you have to reinitialize remoteDB */
+        var url = '';
+        var username = '';
+        var password = '';
+        var remoteDb = new PouchDB(url,
+          {auth: {username: username, password: password}});
+
+
+        var blob = remoteDb.getAttachment(keyName, 'profile.jpg').then(function(blob) {
+        var url = URL.createObjectURL(blob);
+       // console.log(url);
+        var img = document.createElement('img');
+          img.src = url;
+          img.setAttribute('width', '200px');
+          img.setAttribute('width', '200px');
+          img.setAttribute('title', url);
+          document.getElementById("gallery").appendChild(img);
+          document.getElementById("gallery").appendChild(document.createElement('br'));
+        }).catch(function (err) {
+          console.log(err);
+        });;
+      }
+  }).catch(function (err) {
+    console.log(err);
+  })
   }
 
   openGallery (): void {
-      console.log(1);
       let cameraOptions = {
         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
         destinationType: this.camera.DestinationType.DATA_URL,      
@@ -67,21 +93,23 @@ export class HelloIonicPage {
         err => console.log(err));   
   }
 
-   save(DATA_URL) {
-    var _username = '';
-    var _password = '';
-    var remoteDb = new PouchDB(
-      '',
-        {auth: {username: _username, password: _password}});
-        let currentDate = new Date();
-        remoteDb.put({
-          _id: currentDate.toString(),
-          _attachments: {
-          "profile.jpg": {
-            content_type: 'image/jpg',
-            data: DATA_URL
+  save(DATA_URL) {
+
+    var url = '';
+    var username = '';
+    var password = '';
+    var remoteDb = new PouchDB(url,
+      {auth: {username: username, password: password}});
+
+    let currentDate = new Date();
+    remoteDb.put({
+      _id: currentDate.toString(),
+      _attachments: {
+      "profile.jpg": {
+        content_type: 'image/jpg',
+        data: DATA_URL
         }
-      }
+      } 
     }).then(function (response){
       console.log("saved! " + JSON.stringify(response));
     }).catch(function (err) {
