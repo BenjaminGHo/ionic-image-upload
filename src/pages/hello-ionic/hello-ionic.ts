@@ -13,14 +13,9 @@ export class HelloIonicPage {
 
   constructor(
     private camera: Camera
-
-  ) {
-
-  }
-
+  ) {}
 
   ngOnInit() {
-    
     this.loadPictures();
   }
 
@@ -31,7 +26,6 @@ export class HelloIonicPage {
     var password = '';
     var remoteDb = new PouchDB(url,
       {auth: {username: username, password: password}});
-
 
     remoteDb.allDocs().then(function (doc) {
       var allRows = doc.rows;
@@ -45,7 +39,6 @@ export class HelloIonicPage {
         var password = '';
         var remoteDb = new PouchDB(url,
           {auth: {username: username, password: password}});
-
 
         var blob = remoteDb.getAttachment(keyName, 'profile.jpg').then(function(blob) {
         var url = URL.createObjectURL(blob);
@@ -92,7 +85,7 @@ export class HelloIonicPage {
           }, 
         err => console.log(err));   
   }
-
+  
   save(DATA_URL) {
 
     var url = '';
@@ -116,6 +109,5 @@ export class HelloIonicPage {
       console.log(err);
     });
   };
-
-
+  
 }
