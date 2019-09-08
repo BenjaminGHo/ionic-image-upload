@@ -70,12 +70,9 @@ export class HelloIonicPage {
         correctOrientation: true
       }
       let win: any = window;
-      console.log(cameraOptions);
       this.camera.getPicture(cameraOptions)
         .then(DATA_URL => 
-          {
-            console.log(DATA_URL);
-            
+          {      
             /* allows image to be viewed directly */
             /*
             console.log(win.Ionic.WebView.convertFileSrc(file_uri));
