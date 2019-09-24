@@ -8,7 +8,7 @@ import PouchDB from 'pouchdb';
 })
 export class HelloIonicPage {
 
-  getImage:string;
+  getImage: string;
   private imageSrc: string;
 
   constructor(
