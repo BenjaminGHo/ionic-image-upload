@@ -7,32 +7,31 @@
   </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
-<h3>Open Gallery</h3>
-<!--
-<ion-img width="100" height="100" src="{{getImage}}"></ion-img>
-  -->
-<div class="gallery-button" text-center on-tap="openGallery()">
-  <div [hidden]="!imageSrc">
-    <img [src]="imageSrc" />
+  <h3>Open Gallery</h3>
+  <!--
+  <ion-img width="100" height="100" src="{{getImage}}"></ion-img>
+    -->
+  <div class="gallery-button" text-center on-tap="openGallery()">
+    <div [hidden]="!imageSrc">
+      <img [src]="imageSrc" />
+    </div>
+  <ion-icon name="images" style="zoom:4.0;"></ion-icon>
+  <p>Please, choose a Photo</p>  
   </div>
-<ion-icon name="images" style="zoom:4.0;"></ion-icon>
-<p>Please, choose a Photo</p>  
-</div>
 
-<!--
-  <h3>Welcome to your first Ionic app!</h3>
+  <!--
+    <h3>Welcome to your first Ionic app!</h3>
 
-  <p>
-    This starter project is our way of helping you get a functional app running in record time.
-  </p>
-  <p>
-    Follow along on the tutorial section of the Ionic docs!
-  </p>
-  <p>
-    <button ion-button color="primary" menuToggle>Toggle Menu</button>
-  </p>
--->
+    <p>
+      This starter project is our way of helping you get a functional app running in record time.
+    </p>
+    <p>
+      Follow along on the tutorial section of the Ionic docs!
+    </p>
+    <p>
+      <button ion-button color="primary" menuToggle>Toggle Menu</button>
+    </p>
+  -->
   <div id="gallery"></div>
 </ion-content>
